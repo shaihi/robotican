@@ -15,6 +15,7 @@ battery_voltage_divider_ratio: 11.0
 battery_max: 29.3
 battery_min: 24.0
 
+have_arm: false
 have_switch: true
 switch_size: 2
 

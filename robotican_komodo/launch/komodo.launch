@@ -26,7 +26,7 @@
   <arg name="R" default="0.0" />
   <arg name="P" default="0.0" />
   <arg name="Y" default="0.0" />
-  <arg name="arm" default="true"/>
+  <arg name="arm" default="false"/>
   
      <arg name="paused" default="false"/>
     <arg name="use_sim_time" default="true"/>
@@ -35,7 +35,7 @@
     <arg name="debug" default="false"/> 
     
   <arg name="controllers" default='true'/>
-  <arg name="moveit" default='true'/>
+  <arg name="moveit" default='false'/>
   <arg name="use_depth" default='false'/>
   <arg name="robot_localization" default='false'/>
   <arg name="move_base" default='false'/>
@@ -179,8 +179,8 @@
 		</node> 
 </group>
 
-
-    
+<param name="use_gui" value="true"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" respawn="false" output="screen" />
     
 
   <group if="$(arg controllers)">
@@ -197,7 +197,7 @@
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="	  
       robot_state_controller
       mobile_base_controller
-      torso_position_controller
+    
 	  " />
      </group>
     <group if="$(arg arm)">
