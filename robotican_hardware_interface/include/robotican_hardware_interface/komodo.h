@@ -18,7 +18,7 @@
 namespace robotican_hardware {
     class KomodoRobot : public RobotBase {
     private:
-        hardware_interface::PositionJointInterface _positionJointInterface;
+       // hardware_interface::PositionJointInterface _positionJointInterface;
         hardware_interface::PosVelJointInterface _posVelJointInterface;
         dynamixel_controller::DynamixelController* _dynamixelController;
         std::map<std::string, dynamixel_controller::JointInfo_t> _jointInfo;

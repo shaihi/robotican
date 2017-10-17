@@ -28,9 +28,9 @@ namespace robotican_hardware {
         hardware_interface::JointStateInterface _jointStateInterface;
         hardware_interface::VelocityJointInterface _velocityJointInterface;
         hardware_interface::ImuSensorInterface _imuSensorInterface;
-#ifdef RIC_BOARD_TEST
+
         hardware_interface::PositionJointInterface _positionJointInterface;
-#endif
+
         RiCBoardManager _boardManager;
 
     public:

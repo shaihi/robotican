@@ -15,18 +15,18 @@ namespace robotican_hardware {
         if(ros::ok()) {
             _boardManager.buildDevices();
             _boardManager.buildDevices(&_jointStateInterface, &_velocityJointInterface);
-#ifdef RIC_BOARD_TEST
+
             _boardManager.buildDevices(&_jointStateInterface, &_positionJointInterface);
-#endif
+
         }
     }
 
     void RobotBase::registerInterfaces() {
         registerInterface(&_jointStateInterface);
         registerInterface(&_velocityJointInterface);
-#ifdef RIC_BOARD_TEST
-        registerInterface(&_positionJointInterface);
-#endif
+
+       // registerInterface(&_positionJointInterface);
+
     }
 
     ros::Time RobotBase::getTime() {
