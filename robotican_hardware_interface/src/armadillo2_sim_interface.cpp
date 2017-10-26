@@ -1,7 +1,7 @@
 //
 // Created by tom on 09/04/16.
 //
-#include <robotican_hardware_interface/robot_sim_interface.h>
+#include <robotican_hardware_interface/armadillo2_sim_interface.h>
 namespace
 {
 
@@ -16,7 +16,7 @@ namespace gazebo_ros_control
 {
 
 
-    bool RoboticanRobotHWSim::initSim(
+    bool Armadillo2RobotHWSim::initSim(
             const std::string& robot_namespace,
             ros::NodeHandle model_nh,
             gazebo::physics::ModelPtr parent_model,
@@ -219,7 +219,7 @@ namespace gazebo_ros_control
         return true;
     }
 
-    void RoboticanRobotHWSim::readSim(ros::Time time, ros::Duration period)
+    void Armadillo2RobotHWSim::readSim(ros::Time time, ros::Duration period)
     {
         for(unsigned int j=0; j < n_dof_; j++)
         {
@@ -238,7 +238,7 @@ namespace gazebo_ros_control
         }
     }
 
-    void RoboticanRobotHWSim::writeSim(ros::Time time, ros::Duration period)
+    void Armadillo2RobotHWSim::writeSim(ros::Time time, ros::Duration period)
     {
         // If the E-stop is active, joints controlled by position commands will maintain their positions.
         if (e_stop_active_)
@@ -338,7 +338,7 @@ namespace gazebo_ros_control
         }
     }
 
-    void RoboticanRobotHWSim::eStopActive(const bool active)
+    void Armadillo2RobotHWSim::eStopActive(const bool active)
     {
         e_stop_active_ = active;
     }
@@ -346,7 +346,7 @@ namespace gazebo_ros_control
 // Register the limits of the joint specified by joint_name and joint_handle. The limits are
 // retrieved from joint_limit_nh. If urdf_model is not NULL, limits are retrieved from it also.
 // Return the joint's type, lower position limit, upper position limit, and effort limit.
-    void RoboticanRobotHWSim::registerJointLimits(const std::string& joint_name,
+    void Armadillo2RobotHWSim::registerJointLimits(const std::string& joint_name,
                                                   const hardware_interface::JointHandle& joint_handle,
                                                   const ControlMethod ctrl_method,
                                                   const ros::NodeHandle& joint_limit_nh,
@@ -466,7 +466,7 @@ namespace gazebo_ros_control
     }
 
 
-    void RoboticanRobotHWSim::registerJointLimits(const std::string& joint_name,
+    void Armadillo2RobotHWSim::registerJointLimits(const std::string& joint_name,
                                                   const hardware_interface::PosVelJointHandle& joint_handle,
                                                   const ControlMethod ctrl_method,
                                                   const ros::NodeHandle& joint_limit_nh,
@@ -570,5 +570,5 @@ namespace gazebo_ros_control
         }*/
     }
 
-    PLUGINLIB_EXPORT_CLASS(gazebo_ros_control::RoboticanRobotHWSim, gazebo_ros_control::RobotHWSim)
+    PLUGINLIB_EXPORT_CLASS(gazebo_ros_control::Armadillo2RobotHWSim, gazebo_ros_control::RobotHWSim)
 }

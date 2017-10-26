@@ -51,7 +51,7 @@ public:
         if (!joint_handles_ptr_) {return;}
         for (unsigned int i = 0; i < joint_handles_ptr_->size(); ++i)
         {
-            (*joint_handles_ptr_)[i].setCommand((*joint_handles_ptr_)[i].getPosition(), 0.0);
+            (*joint_handles_ptr_)[i].setCommand((*joint_handles_ptr_)[i].getPosition(), 0.05);
         }
     }
 

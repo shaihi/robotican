@@ -133,9 +133,9 @@ include_directories(
 add_library(robotican_controllers
         src/${PROJECT_NAME}/robot.cpp
         src/${PROJECT_NAME}/utils.cpp
-        src/${PROJECT_NAME}/two_finger_controller.cpp
-        include/${PROJECT_NAME}/gripper_action_controller_impl.h
-        include/${PROJECT_NAME}/hardware_interface_adapter.h
+       # src/${PROJECT_NAME}/two_finger_controller.cpp
+        #include/${PROJECT_NAME}/gripper_action_controller_impl.h
+       # include/${PROJECT_NAME}/hardware_interface_adapter.h
         include/${PROJECT_NAME}/joint_trajectory_controller_impl.h
         include/${PROJECT_NAME}/joint_with_effort_trajectory_controller_impl.h
         src/${PROJECT_NAME}/joint_trajectory_controller.cpp
@@ -146,6 +146,8 @@ add_library(robotican_controllers
         src/${PROJECT_NAME}/odometry.cpp
         include/${PROJECT_NAME}/speed_limiter.h
         src/${PROJECT_NAME}/speed_limiter.cpp
+        include/${PROJECT_NAME}/posvel_gripper_controller.h
+        src/${PROJECT_NAME}/posvel_gripper_controller.cpp
         )
 
 ## Add cmake target dependencies of the library
@@ -198,6 +200,8 @@ install(DIRECTORY include/${PROJECT_NAME}/
 install(FILES ros_control_plugins.xml
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
         )
+
+
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 # install(FILES

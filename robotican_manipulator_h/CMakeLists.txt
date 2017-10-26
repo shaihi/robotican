@@ -46,8 +46,8 @@ find_package(LAPACK REQUIRED)
 add_library(${IKFAST_LIBRARY_NAME} src/robotican_manipulator_h_arm_ikfast_moveit_plugin.cpp)
 target_link_libraries(${IKFAST_LIBRARY_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${LAPACK_LIBRARIES})
 
-add_executable(arm_node src/arm_node.cpp)
-target_link_libraries(arm_node ${catkin_LIBRARIES})
+#add_executable(arm_node src/arm_node.cpp)
+#target_link_libraries(arm_node ${catkin_LIBRARIES})
 
 install(TARGETS ${IKFAST_LIBRARY_NAME} LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
 

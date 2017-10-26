@@ -151,13 +151,15 @@
 				<arg name="max_ang" value="1.81" />
 			</include>
 		</group>
-		<group if="$(arg kinect2)">
-			<include file="$(find robotican_common)/launch/kinect2.launch"/>
-
-		</group>
+		
 
 <group if="$(arg softkinetic)">
 		  <include file="$(find robotican_common)/launch/softkinetic_camera_ds325.launch"/>
+		</group>
+
+<group if="$(arg kinect2)">
+			<include file="$(find robotican_common)/launch/kinect2.launch"/>
+
 		</group>
 
 
@@ -166,35 +168,14 @@
 
 	<rosparam file="$(find robotican_armadillo)/config/arm_config.yaml" command="load"/>
 
-	<node name="arm_manager" pkg="robotican_hardware_interface" type="dynamixel_node" respawn="false" output="screen" />
+	
 
 </group>
 		<rosparam file="$(find robotican_armadillo)/config/hardware_interface_config.yaml" command="load"/>
 
 		<rosparam file="$(find robotican_armadillo)/config/arm_config.yaml" command="load"/>
+<node name="armadillo2_hardware_interface" pkg="robotican_hardware_interface" type="armadillo2_hardware_interface_node" respawn="false" output="screen" />
 
-		<node name="robotican_hardware_interface" pkg="robotican_hardware_interface" type="robotican_hardware_interface_node" respawn="false" output="screen" >
-		</node>
-		
-		<node name="dynamixel_manager" pkg="dynamixel_controllers" type="controller_manager.py" required="true" output="screen">
-		  <rosparam>
-                namespace: dxl_manager
-                serial_ports:
-                 pan_tilt_port:
-                  port_name: "/dev/ttyUSB0"
-                  baud_rate: 57142
-                  min_motor_id: 3
-                  max_motor_id: 4
-                  update_rate: 20
-                </rosparam>
-		</node>
-
-		<node name="arm_controller_spawner" pkg="dynamixel_controllers" type="controller_spawner.py"
-		  args="--manager=dxl_manager
-				--port=pan_tilt_port
-		pan_controller
-		tilt_controller"
-				output="screen"/>
 </group>
 
 
@@ -280,4 +261,6 @@
 		<include file="$(find robotican_gui)/launch/robotican_gui.launch">
 		</include>
 	</group>
+
+
 </launch>

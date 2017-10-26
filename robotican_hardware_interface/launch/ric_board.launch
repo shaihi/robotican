@@ -1,3 +1,0 @@
-<launch>
-	<node name="RiCTraffic" output="screen" pkg="ric_board" type="Start.py"/>
-</launch>
