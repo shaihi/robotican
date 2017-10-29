@@ -11,10 +11,12 @@ right_finger_joint: 'right_finger_joint'
                               
 # RiCBoard                                
 battery_pin: 17
-battery_voltage_divider_ratio: 11.0
+battery_voltage_divider_ratio: 22.72
 battery_max: 29.3
 battery_min: 24.0
 
+
+have_imu: false
 imu_fusion_hz: 50
 imu_enable_gyro: true
 imu_enable_fuse_compass: true
@@ -89,8 +91,8 @@ motor0_bais_max: 1
 
 
 motor1_motor_type: 0
-motor1_encoder_pin_A: 29
-motor1_encoder_pin_B: 30
+motor1_encoder_pin_A: 22 #29
+motor1_encoder_pin_B: 23 #30
 motor1_encoder_direction: 1
 motor1_lpf_hz_speed: 80
 motor1_lpf_hz_input: 1000
@@ -119,41 +121,40 @@ motor1_mode: 0
 motor1_bais_min: -1
 motor1_bais_max: 1
 
-
-
 position_motor_size: 1 
 positionMotor0_motor_type: 1
-positionMotor0_a: 1.0
-positionMotor0_b: 0.0
-positionMotor0_lpf_hz_speed: 10
+positionMotor0_a: 0.0009775
+positionMotor0_b: -0.04
+positionMotor0_lpf_hz_speed: 63
 positionMotor0_lpf_hz_input: 50
 positionMotor0_pid_hz: 1000
 positionMotor0_ppr: 2503
 positionMotor0_timeout: 0
 positionMotor0_motor_direction: 1
 positionMotor0_encoder_direction: 1
-positionMotor0_lpf_alpha_speed: 0.0
+positionMotor0_lpf_alpha_speed: 0
 positionMotor0_lpf_alpha_input: 0.05
-positionMotor0_kp: 3800.0
-positionMotor0_ki: 50.0
-positionMotor0_kd: 0.0
+positionMotor0_kp: 3000.0
+positionMotor0_ki: 0.0
+positionMotor0_kd: 0.00
 positionMotor0_kff: 0.0
 positionMotor0_k: -30.0 # Exp!!
-positionMotor0_max_set_point_speed: 0.06
-positionMotor0_min_set_point_speed: -0.06
-positionMotor0_max_set_point_position: 10.0
-positionMotor0_min_set_point_position: -10.0
-positionMotor0_limit: 1.0
-positionMotor0_motor_address: 20
+positionMotor0_max_set_point_speed: 1000
+positionMotor0_min_set_point_speed: -1000
+positionMotor0_max_set_point_position: 1000
+positionMotor0_min_set_point_position: -1000
+positionMotor0_limit: 0.3
+positionMotor0_motor_address: 3
 positionMotor0_motor_emergency_pin: 12
 positionMotor0_motor_emergency_pin_type: 0
 positionMotor0_joint: 'torso_joint'
 positionMotor0_mode: 1
 positionMotor0_read_pin: 21
-positionMotor0_tolerance: 0.005
-positionMotor0_tolerance_time: 1000 # millis
-positionMotor0_stop_limit_max: 10000.0
-positionMotor0_stop_limit_min: -10000.0
+positionMotor0_tolerance: 0.05
+positionMotor0_tolerance_time: 100 # millis
+positionMotor0_stop_limit_max: 1000
+positionMotor0_stop_limit_min: -1000
+
 
 
 gps_baudrate: 9600

@@ -43,9 +43,7 @@ mobile_base_controller:
       has_acceleration_limits: true
       max_acceleration       : 1.0  # rad/s^2
       
-torso_controller:
-  type: position_controllers/JointPositionController
-  joint: torso_joint
+
   
 
 robot_state_controller:
@@ -86,4 +84,7 @@ gripper_controller:
  stalled_velocity_threshold: 0.005
  stall_timeout: 5.0
  
+torso_controller:
+  type: position_controllers/JointPositionController
+  joint: torso_joint
 

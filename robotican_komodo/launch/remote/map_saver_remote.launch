@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  <machine name="or-ThinkPad-T430" address="192.168.0.102" user="or" password="2591989" env-loader="/home/or/komodo_rc.sh" default="true"/> 
+  <arg name="map_file" default="$(find robotican_komodo)/maps/komodo_current_map.yaml"/>
+
+  <!-- Run the map server -->
+  <node machine="or-ThinkPad-T430" name="map_server" pkg="map_server" type="map_saver" args="-f $(arg map_file)" />
+
+</launch>

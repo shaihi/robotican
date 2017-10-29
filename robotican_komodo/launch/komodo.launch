@@ -232,7 +232,7 @@ torso_controller
 	<group unless="$(arg amcl)">
 		<group unless="$(arg hector_slam)">
 			<group unless="$(arg gmapping)">
-				<node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 /map /odom 20" />
+				<!--<node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 /map /odom 20" />-->
 			</group>
 		</group>
 	</group>

@@ -1,0 +1,9 @@
+
+
+
+
+
+
+torso_controller:
+  type: position_controllers/JointPositionController
+  joint: torso_joint

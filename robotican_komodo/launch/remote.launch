@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+ <machine name="or" address="192.168.0.100" user="or" password="2591989" env-loader="/opt/ros/indigo/env.sh" default="true"/> 
+ <!--<machine name="or" address="192.168.0.100" user="or" password="2591989" env-loader="/home/or/catkin_ws/devel/setup.bash" default="true"/>-->
+
+
+   <include file="$(find robotican_komodo)/launch/hector_slam.launch"/>
+   
+
+
+
+
+ <!-- <machine name="or1" address="192.168.0.100" env-loader="/opt/ros/indigo/env.sh" user="or" password="2591989" timeout="3.0"/>
+  <include file="$(find robotican_komodo)/launch/hector_slam.launch"/>-->
+</launch>

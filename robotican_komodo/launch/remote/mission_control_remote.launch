@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  <machine name="robot" address="192.168.0.102" user="or" password="2591989" env-loader="/home/or/komodo_rc.sh" default="true"/> 
+  
+
+  <!-- Run the map server -->
+  <node machine="robot" name="mission_control" pkg="robotican_komodo" type="auto_mission_controlVer-0.py"/>
+
+</launch>

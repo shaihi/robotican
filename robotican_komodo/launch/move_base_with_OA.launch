@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+
+  
+  <master auto="start"/>
+
+  <arg name="base_global_planner" default="navfn/NavfnROS"/>
+  
+
+  
+  <!--- Run Move Base -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" >
+    <param name="base_global_planner" value="$(arg base_global_planner)"/>
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+    <param name="local_costmap/width" value="6.0"/>
+    <param name="local_costmap/height" value="6.0"/> 
+	<remap from="cmd_vel" to="nav_vel" />
+    </node>
+
+</launch>
