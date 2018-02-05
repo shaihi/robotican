@@ -31,7 +31,6 @@
 #include <hardware_interface/joint_command_interface.h>
 #include <hardware_interface/internal/demangle_symbol.h>
 #include <realtime_tools/realtime_buffer.h>
-#include <hardware_interface/posvel_command_interface.h>
 
 // Project
 #include <gripper_action_controller/hardware_interface_adapter.h>

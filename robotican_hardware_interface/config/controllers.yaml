@@ -1,71 +1,24 @@
 
-robot_state_controller:
-    type: joint_state_controller/JointStateController
-    publish_rate: 50  
-
-
-
-arm_trajectory_controller:
-  type: position_velocity_controllers/JointTrajectoryController
-  joints:
-     - rotation1_joint
-     - shoulder1_joint 
-     - shoulder2_joint 
-     - rotation2_joint 
-     - shoulder3_joint 
-     - wrist_joint 
-  publish_rate: 50
-  constraints:
-    goal_time: 15.5                   # Override default
-    stopped_velocity_tolerance: 0.05 # Override default
-    rotation1_joint: {trajectory: 10.2, goal: 10.2}
-    shoulder1_joint: {trajectory: 10.2, goal: 10.2}
-    shoulder2_joint: {trajectory: 10.2, goal: 10.2}
-    rotation2_joint: {trajectory: 10.2, goal: 10.2}
-    shoulder3_joint: {trajectory: 10.2, goal: 10.2}
-    wrist_joint: {trajectory: 10.2, goal: 10.2}
-
-
-gripper_controller:
- type: gripper_controllers/PosVelGripperController
- left_joint: 'left_finger_joint'
- right_joint: 'right_finger_joint'
- goal_tolerance: 0.005
- stalled_velocity_threshold: 0.005
- stall_timeout: 1.0
- joints_vel: 0.4
- action_monitor_rate: 50
-
-
-torso_controller:
-  type: position_controllers/JointPositionController
-  joint: torso_joint
-  
-pan_tilt_trajectory_controller:
-  type: position_controllers/JointTrajectoryController
-  joints: ['head_pan_joint', 'head_tilt_joint']
-
 mobile_base_controller:
-  type        : "diff_drive_with_split_controller/DiffDriveController"
+  type        : "diff_drive_controller/DiffDriveController"
   left_wheel: 'left_wheel_joint'
   right_wheel: 'right_wheel_joint'
   publish_rate: 50.0               # default: 50
-  pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
-  twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
+  pose_covariance_diagonal : [0.01, 0.01, 1000000.0, 1000000.0, 1000000.0, 1000.0]
+  twist_covariance_diagonal: [0.01, 0.01, 1000000.0, 1000000.0, 1000000.0, 1000.0]
 
   # Wheel separation and diameter. These are both optional.
   # diff_drive_controller will attempt to read either one or both from the
   # URDF if not specified as a parameter
   wheel_separation : 0.3284
-  wheel_radius : 0.095
-  slip_factor: 1.0
+  wheel_radius : 0.1
 
   # Wheel separation and radius multipliers
   wheel_separation_multiplier: 1.0 # default: 1.0
   wheel_radius_multiplier    : 1.0 # default: 1.0
 
   # Velocity commands timeout [s], default 0.5
-  cmd_vel_timeout: 1.0
+  cmd_vel_timeout: 0.1
 
   enable_odom_tf: true
 
@@ -80,8 +33,8 @@ mobile_base_controller:
       max_velocity           : 0.8  # m/s
       min_velocity           : -0.5 # m/s
       has_acceleration_limits: true
-      max_acceleration       : 0.22  # m/s^2
-      min_acceleration       : -0.22 # m/s^2
+      max_acceleration       : 0.5  # m/s^2
+      min_acceleration       : -0.5 # m/s^2
   angular:
     z:
       has_velocity_limits    : true
@@ -90,3 +43,105 @@ mobile_base_controller:
       max_acceleration       : 0.5  # rad/s^2
       
 
+robot_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+rotation1_position_controller:
+  type: position_controllers/JointPositionController
+  joint: rotation1_joint
+  
+torso_position_controller:
+  type: position_controllers/JointPositionController
+  joint: torso_joint
+  
+left_motor_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: left_wheel_joint
+
+right_motor_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: right_wheel_joint
+  
+torso_trajectory_controller:
+  type: position_controllers/JointTrajectoryController
+  joints:
+     - torso_joint
+  constraints:
+      goal_time: 4.0
+      stopped_velocity_tolerance: 0.05
+      torso_joint: {trajectory: 0.1, goal: 0.1}
+  stop_trajectory_duration: 5.0
+  state_publish_rate:  50
+  action_monitor_rate: 50
+     
+pan_tilt_controller:
+    type: position_controllers/JointGroupPositionController
+    joints: ['head_pan_joint', 'head_tilt_joint']
+    publish_rate: 20
+  
+arm_position_controller:
+    type: position_controllers/JointGroupPositionController
+    joints: ['rotation1_joint', 'shoulder1_joint', 'shoulder2_joint', 'rotation2_joint', 'shoulder3_joint', 'wrist_joint']
+    publish_rate: 20
+
+
+arm_trajectory_controller:
+  type: position_velocity_controllers/JointTrajectoryController
+  joints:
+     - rotation1_joint
+     - shoulder1_joint 
+     - shoulder2_joint 
+     - rotation2_joint 
+     - shoulder3_joint 
+     - wrist_joint 
+  constraints:
+      goal_time: 4.0
+      stopped_velocity_tolerance: 0.05
+      rotation1_joint: {trajectory: 0.1, goal: 0.1}
+      shoulder1_joint: {trajectory: 0.1, goal: 0.1}
+      shoulder2_joint: {trajectory: 0.1, goal: 0.1}
+      rotation2_joint: {trajectory: 0.1, goal: 0.1}
+      shoulder3_joint: {trajectory: 0.1, goal: 0.1}
+      wrist_joint: {trajectory: 0.1, goal: 0.1}
+  stop_trajectory_duration: 5.0
+  state_publish_rate:  50
+  action_monitor_rate: 50
+
+
+pan_controller:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: head_pan_joint
+    joint_speed: 2.0
+    max_torque: 0.1
+    motor:
+        id: 3
+        init: 2040
+        min: 1000
+        max: 3100
+
+tilt_controller:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: head_tilt_joint
+    joint_speed: 2.0
+    max_torque: 0.1
+    motor:
+        id: 4
+        init: 2500
+        min: 1000
+        max: 3100
+
+
+gripper_controller:
+ type: position_controllers/GripperActionControllerTwo
+ leftJoint: 'left_finger_joint'
+ rightJoint: 'right_finger_joint'
+ goal_tolerance: 0.005
+ stalled_velocity_threshold: 0.005
+ stall_timeout: 5.0

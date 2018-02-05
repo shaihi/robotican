@@ -214,7 +214,6 @@ namespace gripper_action_controller
         command_struct_rt_ = *(command_.readFromRT());
 
         double current_position = pos2Gap(rightjoint_.getPosition());
-//ROS_INFO("current_gap: %f",current_position);
         double current_velocity =  current_position - _lastPosition / period.toSec();
         double current_effort = (fabs(leftjoint_.getEffort())>fabs(rightjoint_.getEffort())) ? fabs(leftjoint_.getEffort()):fabs(rightjoint_.getEffort());
         double error_position = command_struct_rt_.position_ - current_position;
@@ -225,9 +224,9 @@ namespace gripper_action_controller
 
         // Hardware interface adapter: Generate and send commands
         double jointsPos = gap2Pos(command_struct_rt_.position_);
-//ROS_WARN("jointsPos: %f",jointsPos);
         computed_command_ = left_hw_iface_adapter_.updateCommand(time, period,
-                                                                 -jointsPos, 0.0, error_position, error_velocity, command_struct_rt_.max_effort_);
+                                                                 -jointsPos, 0.0,
+                                                                 error_position, error_velocity, command_struct_rt_.max_effort_);
         computed_command_ = right_hw_iface_adapter_.updateCommand(time, period,
                                                                   jointsPos, 0.0, error_position, error_velocity, command_struct_rt_.max_effort_);
     }
@@ -236,7 +235,7 @@ namespace gripper_action_controller
     void GripperActionControllerTwo<HardwareInterface>::
     goalCB(GoalHandle gh)
     {
-        ROS_INFO("Recieved new action goal");
+        ROS_DEBUG_STREAM_NAMED(name_,"Recieved new action goal");
 
         // Precondition: Running controller
         if (!this->isRunning())
@@ -315,15 +314,12 @@ namespace gripper_action_controller
     checkForSuccess(const ros::Time &time, double error_position, double current_position, double current_velocity,
                     double current_effort,double max_effort)
     {
-
-//ROS_ERROR("error_position: %f",error_position);
-        if(!rt_active_goal_) {
+        if(!rt_active_goal_)
             return;
-}
 
-        if(rt_active_goal_->gh_.getGoalStatus().status != actionlib_msgs::GoalStatus::ACTIVE){
+        if(rt_active_goal_->gh_.getGoalStatus().status != actionlib_msgs::GoalStatus::ACTIVE)
             return;
-}
+
         if(fabs(error_position) < goal_tolerance_)
         {
             pre_alloc_result_->effort = computed_command_;
@@ -331,7 +327,7 @@ namespace gripper_action_controller
             pre_alloc_result_->reached_goal = true;
             pre_alloc_result_->stalled = false;
             rt_active_goal_->setSucceeded(pre_alloc_result_);
-            ROS_INFO("GRIPPER: Reached Goal");
+            ROS_DEBUG("GRIPPER: Reached Goal");
         }
         else
         {

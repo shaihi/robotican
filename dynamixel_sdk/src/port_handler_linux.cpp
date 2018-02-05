@@ -42,7 +42,7 @@
 
 #include "dynamixel_sdk/port_handler_linux.h"
 
-#define LATENCY_TIMER  1  // msec (USB latency timer)
+#define LATENCY_TIMER   4  // msec (USB latency timer)
 
 using namespace dynamixel;
 
@@ -204,7 +204,7 @@ bool PortHandlerLinux::setCustomBaudrate(int speed)
     return false;
   }
 
-  ss.flags = (ss.flags & ~ASYNC_SPD_MASK) | ASYNC_SPD_CUST | ASYNC_LOW_LATENCY;
+  ss.flags = (ss.flags & ~ASYNC_SPD_MASK) | ASYNC_SPD_CUST;
   ss.custom_divisor = (ss.baud_base + (speed / 2)) / speed;
   int closest_speed = ss.baud_base / ss.custom_divisor;
 
@@ -221,8 +221,6 @@ bool PortHandlerLinux::setCustomBaudrate(int speed)
   }
 
   tx_time_per_byte = (1000.0 / (double)speed) * 10.0;
-
-
   return true;
 }
 
